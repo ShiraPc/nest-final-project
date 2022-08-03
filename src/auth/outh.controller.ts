@@ -17,8 +17,4 @@ export class AuthController{
         return this.authService.signIn()
     }
 
-    // @Put('createUser')
-    // createUser(@Body user){
-
-    // }
 }
