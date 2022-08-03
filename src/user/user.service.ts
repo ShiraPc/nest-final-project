@@ -1,3 +1,4 @@
+
 import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
 import { User, userSchema } from 'src/schemas/user.schema';
@@ -17,8 +18,8 @@ export class UserService {
   async findAll(): Promise<User[]> {
     return this.userSchema.find().exec();
   }
-}
 
+}
 
 
 
