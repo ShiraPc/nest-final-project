@@ -1,18 +1,24 @@
-import { Get, Injectable, Post } from "@nestjs/common";
-import { MongooseModule } from '@nestjs/mongoose';
-import { User, userSchema } from "src/schemas/user.schema";
 
-@Injectable({})
-export class UserService{
-      [x: string]: any;
-      async create(createUser: User): Promise<User> {
-        const createdUser = new this.catModel(createUser);
-        return createdUser.save();
-      }
+import { Model } from 'mongoose';
+import { Injectable, Inject } from '@nestjs/common';
+import { User, userSchema } from 'src/schemas/user.schema';
+import { userDTO } from 'src/DTO/user.dto';
 
-      async findAllUsers(): Promise<User[]> {
-        return this.userModel.find().exec();
-      }
+@Injectable()
+export class UserService {
+  constructor(
+   @Inject(userSchema) 
+   private userSchema: Model<User>) {}
+
+  async create(createUserDTO: userDTO): Promise<User> {
+    const createdUser = new this.userSchema(createUserDTO);
+    return createdUser.save();
+  }
+
+  async findAll(): Promise<User[]> {
+    return this.userSchema.find().exec();
+  }
+
 }
 
 
