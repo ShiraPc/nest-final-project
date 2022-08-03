@@ -1,13 +1,13 @@
 import { Controller, Get, Post } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
 import { User, userSchema } from "src/schemas/user.schema";
 import { UserService } from "./user.service";
 
 @Controller('user')
 export class UserController{
-    UserModel: any;
-    constructor(private userService:UserService){
-        // this.authService.test()
-    }
+    constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+    
 
     @Post()
     createUser(newUser:User){
@@ -29,5 +29,6 @@ export class UserController{
       
       }
 }
+
 
 
